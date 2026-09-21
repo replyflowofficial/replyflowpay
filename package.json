@@ -12,6 +12,8 @@
     "prisma:generate:pg": "prisma generate --schema=./prisma/schema.prisma",
     "prisma:push:pg": "prisma db push --schema=./prisma/schema.prisma",
     "prisma:seed": "node prisma/seed.js"
+    "prisma:seed": "node prisma/seed.js",
+    "prisma:seed:admin": "node scripts/seed-admin.js"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",

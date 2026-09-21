@@ -73,5 +73,16 @@ export async function POST(req: NextRequest) {
   } catch (err: any) {
     console.error("Login error:", err);
     return NextResponse.json({ error: "Internal server error" }, { status: 500 });
+
+    let errorMessage = "Internal server error";
+    if (err?.code === "P2021" || err?.message?.includes("does not exist") || err?.message?.includes("no such table")) {
+      errorMessage = "Database tables not initialized. Please push the schema to your PostgreSQL database.";
+    } else if (err?.code === "P1001" || err?.code === "P1000" || err?.message?.includes("Can't reach database server")) {
+      errorMessage = "Cannot connect to database. Please verify DATABASE_URL in Vercel settings.";
+    } else if (err?.message?.includes("dev.db") || err?.message?.includes("unable to open database file")) {
+      errorMessage = "SQLite cannot run on Vercel serverless. Please set a PostgreSQL DATABASE_URL.";
+    }
+
+    return NextResponse.json({ error: errorMessage }, { status: 500 });
   }
 }
