@@ -5,6 +5,8 @@ import { generateWebsiteCredentials } from "@/lib/crypto";
 import { db } from "@/lib/db";
 import { createAuditLog } from "@/lib/audit";
 
+export const dynamic = "force-dynamic";
+
 export async function GET(req: NextRequest) {
   const session = await getSessionFromRequest(req);
   if (!session) {

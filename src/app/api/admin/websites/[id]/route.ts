@@ -4,6 +4,8 @@ import { UpdateWebsiteSchema } from "@/lib/validations";
 import { db } from "@/lib/db";
 import { createAuditLog } from "@/lib/audit";
 
+export const dynamic = "force-dynamic";
+
 export async function GET(
   req: NextRequest,
   { params }: { params: Promise<{ id: string }> }
